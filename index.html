@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dbVidya - Learning Portal</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* ✅ TYPING ANIMATION FOR HEADER */
+        header h1 {
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid white;
+            font-size: 22px;
+            animation: typing 4s steps(40) 1s forwards, blink 0.7s infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* ✅ STICKY HEADER */
+        header {
+            background-color: #064d2e;
+            color: white;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* ✅ SHIMMER EFFECT ON BANNER */
+        .banner {
+            width: 100%;
+            height: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 150%; }
+        }
+
+        /* ✅ STICKY NAVIGATION */
+        nav {
+            position: sticky;
+            top: 80px;
+            z-index: 999;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 10px;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 5px;
+        }
+
+        nav ul li a {
+            padding: 12px 18px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav ul li:nth-child(odd) a { background-color: #0a6f3c; }
+        nav ul li:nth-child(even) a { background-color: #444; }
+
+        nav ul li a:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+
+        /* ✅ SECTION FADE-IN ANIMATION */
+        section {
+            margin: 20px;
+            padding: 20px;
+            border-bottom: 1px solid #ccc;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeSection 1s ease forwards;
+        }
+
+        section:nth-of-type(1) { animation-delay: 0.3s; }
+        section:nth-of-type(2) { animation-delay: 0.6s; }
+        section:nth-of-type(3) { animation-delay: 0.9s; }
+
+        @keyframes fadeSection {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ✅ INSTRUCTOR CARD WITH GRADIENT + GLOW + FADE-IN */
+        .instructor-card {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 25px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #e6f4ec, #cfe9d9, #dff5e7, #c3e3d0);
+            background-size: 300% 300%;
+            animation: gradientMove 8s ease infinite, fadeInUp 1.2s ease both;
+            box-shadow: 0 0 18px rgba(10, 111, 60, 0.35);
+            border: 2px solid rgba(10, 111, 60, 0.4);
+            transition: box-shadow 0.4s ease;
+        }
+
+        .instructor-card:hover {
+            box-shadow: 0 0 28px rgba(10, 111, 60, 0.55);
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(25px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ✅ PHOTO + THUMBNAIL SIDE BY SIDE */
+        .instructor-flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        /* ✅ Floating Animation for Photo */
+        .instructor-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #0a6f3c;
+            animation: floatPhoto 4s ease-in-out infinite;
+        }
+
+        @keyframes floatPhoto {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* ✅ VIDEO THUMBNAIL CARD */
+        .video-thumbnail {
+            position: relative;
+            width: 320px;
+            height: 180px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 55px;
+            color: white;
+            opacity: 0.85;
+            text-shadow: 0 0 12px black;
+        }
+
+        .video-thumbnail:hover {
+            transform: scale(1.06);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .instructor-name {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #064d2e;
+        }
+
+        .instructor-title {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        /* ✅ LinkedIn Button with Pulse Glow */
+        .linkedin-btn {
+            padding: 14px 22px;
+            background-color: #0a66c2;
+            color: white;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0px rgba(10, 102, 194, 0.4); }
+            50% { box-shadow: 0 0 14px rgba(10, 102, 194, 0.6); }
+            100% { box-shadow: 0 0 0px rgba(10, 102, 194, 0.4); }
+        }
+
+        .linkedin-btn:hover {
+            opacity: 0.85;
+            transform: scale(1.05);
+        }
+
+        /* ✅ SCROLL TO TOP BUTTON */
+        #scrollTopBtn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background-color: #064d2e;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: 0.3s;
+            z-index: 9999;
+        }
+
+        #scrollTopBtn:hover {
+            transform: scale(1.1);
+            background-color: #0a6f3c;
+        }
+
+        /* ✅ IFRAME CONTENT AREA */
+        #content {
+            width: 100%;
+            height: 600px;
+            border: none;
+            margin-top: 20px;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            width: 160px;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 30px;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            z-index: 9999;
+        }
+    </style>
+
+    <script>
+        function loadPage(url) {
+            document.getElementById("content").src = url;
+        }
+
+        /* ✅ Scroll-to-top button logic */
+        window.onscroll = function() {
+            let btn = document.getElementById("scrollTopBtn");
+            if (document.documentElement.scrollTop > 200) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    </script>
+</head>
+
+<body>
+
+<header>
+    <h1>dbVidya Video Tutorials | +91 9912323000 | info@dbvidya.com</h1>
+</header>
+
+<img src="website_banner_dbvidya.png" alt="dbVidya Banner" class="banner">
+
+<!-- ✅ Instructor Section -->
+<section id="instructor">
+    <h2>Instructor</h2>
+
+    <div class="instructor-card">
+
+        <div class="instructor-flex">
+
+            <!-- ✅ Instructor Photo -->
+            <img src="madhavi.jpg" alt="Instructor Photo" class="instructor-photo">
+
+            <!-- ✅ Clickable Thumbnail -->
+            <a href="https://www.youtube.com/watch?v=QtZVEWAp5Xg" target="_blank" class="video-thumbnail">
+                <img src="https://img.youtube.com/vi/QtZVEWAp5Xg/hqdefault.jpg" alt="Video Thumbnail">
+                <div class="play-button">▶</div>
+            </a>
+
+        </div>
+
+        <div class="instructor-name">Madhavi Batchu</div>
+        <div class="instructor-title">Data Modeling & Performance Tuning Specialist</div>
+
+        <a href="https://www.linkedin.com/in/batchumadhavi/" target="_blank" class="linkedin-btn">
+            🔗 View LinkedIn Profile
+        </a>
+    </div>
+</section>
+
+<!-- ✅ Navigation Menu -->
+<nav>
+    <ul>
+        <li><a onclick="loadPage('https://dbvidya.talentlms.com/catalog/info/id:128')">Oracle Performance Tuning</a></li>
+        <li><a onclick="loadPage('https://dbvidya.talentlms.com/catalog/info/id:135')">Tuning Crash Tutorial</a></li>
+        <li><a onclick="loadPage('https://dbvidya.talentlms.com/catalog/info/id:130')">Erwin Video Tutorial</a></li>
+        <li><a onclick="loadPage('https://dbvidya.talentlms.com/catalog/info/id:133')">ER Modeling</a></li>
+        <li><a onclick="loadPage('https://dbvidya.talentlms.com/catalog/info/id:131')">Dimensional Modeling</a></li>
+        <li><a onclick="document.getElementById('instructor').scrollIntoView({behavior:'smooth'})">Instructor</a></li>
+    </ul>
+</nav>
+
+<iframe id="content"></iframe>
+
+<footer>
+    <p>© 2025 dbVidya Learning Portal</p>
+</footer>
+
+<!-- ✅ Scroll-to-top button -->
+<div id="scrollTopBtn" onclick="scrollToTop()">⬆ Top</div>
+
+<!-- ✅ WhatsApp Button -->
+<a href="https://wa.me/919912323000?text=Hi%20I%20want%20course%20details" class="whatsapp-float" target="_blank">
+   💬 Chat on WhatsApp
+</a>
+
+</body>
+</html>
