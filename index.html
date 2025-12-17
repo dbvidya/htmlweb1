@@ -24,14 +24,8 @@
             animation: typing 4s steps(40) 1s forwards, blink 0.7s infinite;
         }
 
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
+        @keyframes typing { from { width: 0; } to { width: 100%; } }
+        @keyframes blink { 50% { border-color: transparent; } }
 
         /* ✅ STICKY HEADER */
         header {
@@ -67,7 +61,7 @@
             100% { left: 150%; }
         }
 
-        /* ✅ STICKY NAVIGATION */
+        /* ✅ NAVIGATION */
         nav {
             position: sticky;
             top: 80px;
@@ -104,7 +98,30 @@
             transform: scale(1.05);
         }
 
-        /* ✅ SECTION FADE-IN ANIMATION */
+        /* ✅ MOBILE MENU FIX */
+        @media (max-width: 768px) {
+            nav ul li {
+                display: block;
+                width: 100%;
+                margin: 8px 0;
+            }
+
+            nav ul li a {
+                display: block;
+                width: 90%;
+                margin: 0 auto;
+                font-size: 18px;
+            }
+
+            nav { top: 70px; }
+
+            .instructor-flex {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* ✅ SECTION FADE-IN */
         section {
             margin: 20px;
             padding: 20px;
@@ -119,13 +136,10 @@
         section:nth-of-type(3) { animation-delay: 0.9s; }
 
         @keyframes fadeSection {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ✅ INSTRUCTOR CARD WITH GRADIENT + GLOW + FADE-IN */
+        /* ✅ INSTRUCTOR CARD */
         .instructor-card {
             max-width: 900px;
             margin: 0 auto;
@@ -154,7 +168,7 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* ✅ PHOTO + THUMBNAIL SIDE BY SIDE */
+        /* ✅ FLEX LAYOUT */
         .instructor-flex {
             display: flex;
             justify-content: center;
@@ -163,7 +177,7 @@
             flex-wrap: wrap;
         }
 
-        /* ✅ Floating Animation for Photo */
+        /* ✅ FLOATING PHOTO */
         .instructor-photo {
             width: 160px;
             height: 160px;
@@ -179,7 +193,7 @@
             100% { transform: translateY(0); }
         }
 
-        /* ✅ VIDEO THUMBNAIL CARD */
+        /* ✅ VIDEO THUMBNAIL */
         .video-thumbnail {
             position: relative;
             width: 320px;
@@ -212,10 +226,15 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.25);
         }
 
+        /* ✅ INSTRUCTOR INFO FIX */
+        .instructor-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+
         .instructor-name {
             font-size: 22px;
             font-weight: bold;
-            margin-top: 15px;
             color: #064d2e;
         }
 
@@ -225,7 +244,7 @@
             margin-bottom: 15px;
         }
 
-        /* ✅ LinkedIn Button with Pulse Glow */
+        /* ✅ LINKEDIN BUTTON */
         .linkedin-btn {
             padding: 14px 22px;
             background-color: #0a66c2;
@@ -234,8 +253,8 @@
             font-size: 18px;
             font-weight: bold;
             text-decoration: none;
-            transition: 0.3s;
             animation: pulseGlow 3s ease-in-out infinite;
+            transition: 0.3s;
         }
 
         @keyframes pulseGlow {
@@ -245,8 +264,23 @@
         }
 
         .linkedin-btn:hover {
-            opacity: 0.85;
             transform: scale(1.05);
+            opacity: 0.85;
+        }
+
+        /* ✅ IFRAME */
+        #content {
+            width: 100%;
+            height: 600px;
+            border: none;
+            margin-top: 20px;
+        }
+
+        /* ✅ FOOTER */
+        footer {
+            background: #333;
+            color: white;
+            padding: 10px;
         }
 
         /* ✅ SCROLL TO TOP BUTTON */
@@ -271,20 +305,7 @@
             background-color: #0a6f3c;
         }
 
-        /* ✅ IFRAME CONTENT AREA */
-        #content {
-            width: 100%;
-            height: 600px;
-            border: none;
-            margin-top: 20px;
-        }
-
-        footer {
-            background: #333;
-            color: white;
-            padding: 10px;
-        }
-
+        /* ✅ WHATSAPP BUTTON */
         .whatsapp-float {
             position: fixed;
             width: 160px;
@@ -307,14 +328,10 @@
             document.getElementById("content").src = url;
         }
 
-        /* ✅ Scroll-to-top button logic */
+        /* ✅ Scroll-to-top logic */
         window.onscroll = function() {
             let btn = document.getElementById("scrollTopBtn");
-            if (document.documentElement.scrollTop > 200) {
-                btn.style.display = "block";
-            } else {
-                btn.style.display = "none";
-            }
+            btn.style.display = document.documentElement.scrollTop > 200 ? "block" : "none";
         };
 
         function scrollToTop() {
@@ -350,12 +367,16 @@
 
         </div>
 
-        <div class="instructor-name">Madhavi Batchu</div>
-        <div class="instructor-title">Data Modeling & Performance Tuning Specialist</div>
+        <!-- ✅ Instructor Info -->
+        <div class="instructor-info">
+            <div class="instructor-name">Madhavi Batchu</div>
+            <div class="instructor-title">Data Modeling & Performance Tuning Specialist</div>
 
-        <a href="https://www.linkedin.com/in/batchumadhavi/" target="_blank" class="linkedin-btn">
-            🔗 View LinkedIn Profile
-        </a>
+            <a href="https://www.linkedin.com/in/batchumadhavi/" target="_blank" class="linkedin-btn">
+                🔗 View LinkedIn Profile
+            </a>
+        </div>
+
     </div>
 </section>
 
