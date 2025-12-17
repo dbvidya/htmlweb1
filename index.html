@@ -1,449 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dbVidya - Learning Portal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dbVidya - Learning Portal</title>
+<link rel="icon" type="image/png" href="dbvidya_fevicon.png">
 
-    <!-- ✅ Favicon -->
-    <link rel="icon" type="image/png" href="dbvidya_fevicon.png">
+<style>
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; text-align: center; overflow-x: hidden; background: #fafafa; }
 
-    <!-- ✅ SEO Meta Tags -->
-    <meta name="description" content="dbVidya offers Oracle Performance Tuning, Data Modeling, ER Modeling, Dimensional Modeling and Erwin tutorials by Madhavi Batchu.">
-    <meta name="keywords" content="Oracle Performance Tuning, Data Modeling, Erwin, ER Modeling, Dimensional Modeling, dbVidya, Madhavi Batchu">
-    <meta name="author" content="Madhavi Batchu">
+/* HEADER */
+header { background-color: #064d2e; color: white; padding: 8px 10px; position: sticky; top: 0; z-index: 1000; }
+.header-flex { display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; }
+.header-logo { height: 40px; }
 
-    <!-- ✅ OpenGraph -->
-    <meta property="og:title" content="dbVidya - Learning Portal">
-    <meta property="og:description" content="Learn Oracle Performance Tuning, Data Modeling, ER Modeling and more with expert Madhavi Batchu.">
-    <meta property="og:image" content="website_banner_dbvidya.png">
-    <meta property="og:url" content="https://dbvidya.com">
-    <meta property="og:type" content="website">
+/* HERO */
+.hero { position: relative; background: url('website_banner_dbvidya.png') center/cover no-repeat; padding: 110px 20px; color: white; }
+.hero::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.55); z-index: 1; }
+.hero-content { position: relative; z-index: 2; }
+.hero h1 { font-size: 32px; margin-bottom: 10px; }
+.hero p { font-size: 18px; margin-bottom: 25px; }
+.hero-buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.hero-btn { padding: 14px 24px; background-color: #B86314; color: white; border-radius: 6px; font-size: 18px; font-weight: bold; text-decoration: none; transition: 0.3s; }
+.hero-btn:hover { background-color: #8F4E10; transform: scale(1.05); }
+.hero-btn.secondary { background-color: #0a66c2; }
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            overflow-x: hidden;
-            background: #fafafa;
-        }
+/* ANIMATIONS */
+.fade-section { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
+.fade-section.visible { opacity: 1; transform: translateY(0); }
 
-        /* ✅ HEADER */
-        header {
-            background-color: #064d2e;
-            color: white;
-            padding: 15px 10px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+/* INSTRUCTOR */
+section { padding: 30px 20px 10px 20px; }
+.instructor-card { max-width: 900px; margin: 0 auto; padding: 25px; border-radius: 12px; background: #e6f4ec; box-shadow: 0 0 18px rgba(10,111,60,0.35); }
+.instructor-flex { display: flex; justify-content: center; align-items: center; gap: 25px; flex-wrap: wrap; }
+.instructor-photo { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid #0a6f3c; }
 
-        .header-flex {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+/* COURSES */
+.course-container { max-width: 1200px; margin: 20px auto 40px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 0 20px; }
+.course-card { background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); overflow: hidden; border: 2px solid #B86314; transition: 0.3s ease; cursor: pointer; }
+.course-card:hover { transform: scale(1.05); box-shadow: 0 12px 28px rgba(184,99,20,0.45); }
+.active-course { border: 4px solid #ff8c42 !important; box-shadow: 0 0 20px rgba(255,140,66,0.8) !important; transform: scale(1.03); }
+.course-card img { width: 100%; height: 160px; object-fit: cover; }
+.course-card h3 { margin: 10px 0 5px 0; }
+.cta-btn { padding: 12px 20px; background-color: #B86314; color: white; border-radius: 6px; text-decoration: none; font-weight: bold; cursor: pointer; display: inline-block; margin-bottom: 15px; }
 
-        .header-logo {
-            height: 55px;
-        }
+/* SUPPORT BOX */
+.support-box { background: #fff7e6; border-left: 5px solid #B86314; padding: 15px 20px; margin: 0 auto 20px auto; max-width: 900px; border-radius: 8px; text-align: left; }
+.support-box h3 { margin: 0 0 5px 0; color: #B86314; }
+.support-box p { margin: 0; font-size: 15px; }
 
-        header h1 {
-            display: inline-block;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 3px solid white;
-            font-size: 20px;
-            animation: typing 4s steps(40) 1s forwards, blink 0.7s infinite;
-        }
+/* IFRAME (30% REDUCED HEIGHT) */
+#courseFrame { width: 100%; height: 455px; border: none; margin-top: 10px; }
 
-        @keyframes typing { from { width: 0; } to { width: 100%; } }
-        @keyframes blink { 50% { border-color: transparent; } }
+/* TESTIMONIALS */
+.testimonials { background: #fff; padding: 30px 20px; }
+.testimonial-strip { max-width: 900px; margin: 0 auto; background: #f5f5f5; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.testimonial { text-align: left; font-size: 15px; line-height: 1.5; }
+.testimonial-quote { font-style: italic; margin-bottom: 8px; }
+.testimonial-name { font-weight: bold; color: #064d2e; }
+.testimonial-role { font-size: 13px; color: #555; }
 
-        /* ✅ Banner */
-        .banner {
-            width: 100%;
-            height: auto;
-            position: relative;
-            overflow: hidden;
-        }
+/* FAQ */
+.faq-section { max-width: 900px; margin: 0 auto 10px auto; text-align: left; }
+.faq-item { background: #ffffff; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); overflow: hidden; }
+.faq-question { padding: 12px 16px; cursor: pointer; font-weight: bold; background: #f4f4f4; display: flex; justify-content: space-between; align-items: center; }
+.faq-answer { padding: 0 16px 12px 16px; display: none; font-size: 14px; line-height: 1.5; }
+.faq-item.open .faq-answer { display: block; }
 
-        .banner::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
-            animation: shimmer 3s infinite;
-        }
+/* FOOTER */
+footer { background: #333; color: white; padding: 20px; margin-top: 40px; }
 
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 150%; }
-        }
+/* SCROLL TO TOP */
+#scrollTopBtn { position: fixed; bottom: 25px; left: 25px; background-color: #064d2e; color: white; padding: 12px 18px; border-radius: 50px; cursor: pointer; display: none; z-index: 9999; }
 
-        /* ✅ Instructor Section */
-        section {
-            margin: 20px;
-            padding: 20px;
-        }
+/* WHATSAPP BUTTON */
+.whatsapp-float { position: fixed; bottom: 25px; right: 25px; z-index: 9999; text-decoration: none; }
+.whatsapp-button { background-color: #25D366; color: white; font-weight: bold; padding: 12px 20px; border-radius: 50px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); font-size: 16px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
+.whatsapp-button:hover { transform: scale(1.05); }
 
-        .instructor-card {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 25px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #e6f4ec, #cfe9d9, #dff5e7, #c3e3d0);
-            background-size: 300% 300%;
-            animation: gradientMove 8s ease infinite;
-            box-shadow: 0 0 18px rgba(10, 111, 60, 0.35);
-        }
+/* MOBILE */
+@media (max-width: 600px) {
+.course-container { grid-template-columns: 1fr; }
+.cta-btn { width: 100%; padding: 16px; font-size: 18px; }
+.course-card img { height: 200px; }
+.hero h1 { font-size: 26px; }
+.hero p { font-size: 16px; }
+.hero-buttons { flex-direction: column; }
+.hero-btn { width: 100%; text-align: center; }
+}
+</style>
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+<script>
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth" });
+}
 
-        .instructor-flex {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
+function loadCourse(url, card) {
+  const frame = document.getElementById("courseFrame");
+  if (frame) frame.src = url;
+  document.querySelectorAll(".course-card").forEach(c => c.classList.remove("active-course"));
+  if (card) card.classList.add("active-course");
+}
 
-        .instructor-photo {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #0a6f3c;
-            animation: floatPhoto 4s ease-in-out infinite;
-        }
+document.addEventListener("DOMContentLoaded", () => {
+  // Scroll-in animation
+  document.querySelectorAll(".fade-section").forEach(sec => {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+    }, { threshold: 0.2 });
+    obs.observe(sec);
+  });
 
-        @keyframes floatPhoto {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0); }
-        }
+  // FAQ accordion
+  document.querySelectorAll(".faq-question").forEach(q => {
+    q.addEventListener("click", () => q.parentElement.classList.toggle("open"));
+  });
 
-        .video-thumbnail {
-            position: relative;
-            width: 320px;
-            height: 180px;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-        }
+  // Auto-load first course
+  const firstCard = document.querySelector(".course-card");
+  if (firstCard) {
+    loadCourse("https://dbvidya.talentlms.com/catalog/info/id:128", firstCard);
+  }
+});
 
-        .video-thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+window.onscroll = function() {
+  let btn = document.getElementById("scrollTopBtn");
+  btn.style.display = document.documentElement.scrollTop > 200 ? "block" : "none";
+};
 
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 55px;
-            color: white;
-            opacity: 0.85;
-        }
-
-        .instructor-info {
-            margin-top: 20px;
-        }
-
-        .linkedin-btn {
-            padding: 14px 22px;
-            background-color: #0a66c2;
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        /* ✅ Course Cards */
-        .course-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            padding: 0 20px;
-        }
-
-        .course-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            overflow: hidden;
-            border: 2px solid #B86314;
-            transition: 0.4s ease;
-            position: relative;
-            animation: floatCard 5s ease-in-out infinite;
-        }
-
-        /* ✅ Floating animation */
-        @keyframes floatCard {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0); }
-        }
-
-        /* ✅ Hover animation */
-        .course-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 28px rgba(184, 99, 20, 0.45);
-        }
-
-        .course-card img {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-        }
-
-        .course-content {
-            padding: 20px;
-        }
-
-        .course-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #064d2e;
-        }
-
-        /* ✅ Most Popular Badge */
-        .badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: #B86314;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: bold;
-            box-shadow: 0 0 10px rgba(184, 99, 20, 0.6);
-            animation: glowBadge 2s infinite alternate;
-        }
-
-        @keyframes glowBadge {
-            0% { box-shadow: 0 0 6px rgba(184, 99, 20, 0.4); }
-            100% { box-shadow: 0 0 16px rgba(184, 99, 20, 0.9); }
-        }
-
-        .cta-btn {
-            padding: 12px 20px;
-            background-color: #B86314;
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            cursor: pointer;
-            display: inline-block;
-            margin-top: 10px;
-        }
-
-        .cta-btn:hover {
-            background-color: #8F4E10;
-            box-shadow: 0 0 12px rgba(184, 99, 20, 0.6);
-        }
-
-        /* ✅ iframe */
-        #courseFrame {
-            width: 100%;
-            height: 650px;
-            border: none;
-            margin-top: 40px;
-        }
-
-        /* ✅ Footer */
-        footer {
-            background: #333;
-            color: white;
-            padding: 20px;
-            margin-top: 40px;
-        }
-
-        .social-icons img {
-            height: 32px;
-            width: 32px;
-            margin: 0 10px;
-            transition: 0.3s;
-        }
-
-        .social-icons img:hover {
-            transform: scale(1.2);
-            filter: brightness(1.3);
-        }
-
-        /* ✅ WhatsApp Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25D366;
-            color: white;
-            padding: 12px 15px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            z-index: 9999;
-        }
-
-        /* ✅ Scroll to Top */
-        #scrollTopBtn {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            background-color: #064d2e;
-            color: white;
-            padding: 12px 18px;
-            border-radius: 50px;
-            cursor: pointer;
-            display: none;
-            z-index: 9999;
-        }
-    </style>
-
-    <script>
-        function loadCourse(url) {
-            document.getElementById("courseFrame").src = url;
-            window.scrollTo({ top: document.getElementById("courseFrame").offsetTop - 20, behavior: "smooth" });
-        }
-
-        window.onscroll = function() {
-            let btn = document.getElementById("scrollTopBtn");
-            btn.style.display = document.documentElement.scrollTop > 200 ? "block" : "none";
-        };
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-    </script>
+function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
+</script>
 </head>
 
 <body>
 
 <header>
-    <div class="header-flex">
-        <img src="logo.png" class="header-logo">
-        <h1>dbVidya Video Tutorials | +91 9912323000 | info@dbvidya.com</h1>
-    </div>
+  <div class="header-flex">
+    <img src="logo.png" class="header-logo" alt="dbVidya logo">
+    <h2>dbVidya Video Tutorials | +91 9912323000 | info@dbvidya.com</h2>
+  </div>
 </header>
 
-<img src="website_banner_dbvidya.png" class="banner">
-
-<!-- ✅ Instructor Section -->
-<section id="instructor">
-    <h2>Instructor</h2>
-
-    <div class="instructor-card">
-        <div class="instructor-flex">
-            <img src="madhavi.jpg" class="instructor-photo">
-
-            <a href="https://www.youtube.com/watch?v=QtZVEWAp5Xg" target="_blank" class="video-thumbnail">
-                <img src="https://img.youtube.com/vi/QtZVEWAp5Xg/hqdefault.jpg">
-                <div class="play-button">▶</div>
-            </a>
-        </div>
-
-        <div class="instructor-info">
-            <h3>Madhavi Batchu</h3>
-            <p>Data Modeling & Performance Tuning Specialist</p>
-
-            <a href="https://www.linkedin.com/in/batchumadhavi/" target="_blank" class="linkedin-btn">
-                🔗 View LinkedIn Profile
-            </a>
-        </div>
+<div class="hero fade-section">
+  <div class="hero-content">
+    <h1>Learn Database Performance & Data Modeling With Confidence</h1>
+    <p>Clear, practical courses designed for real-world success.</p>
+    <div class="hero-buttons">
+      <a class="hero-btn" onclick="scrollToSection('courses')">Browse All Courses</a>
+      <a class="hero-btn secondary" onclick="scrollToSection('instructor')">Watch Intro Video</a>
     </div>
-</section>
-
-<!-- ✅ Course Cards (Integrated into main page) -->
-<h2>Courses</h2>
-
-<div class="course-container">
-
-    <!-- ✅ Oracle Performance Tuning (Most Popular) -->
-    <div class="course-card">
-        <div class="badge">Most Popular</div>
-        <img src="course_oracle.png">
-        <div class="course-content">
-            <div class="course-title">Oracle Performance Tuning</div>
-            <div class="cta-btn" onclick="loadCourse('https://dbvidya.talentlms.com/catalog/info/id:128')">View Course</div>
-        </div>
-    </div>
-
-    <div class="course-card">
-        <img src="course_tuning.png">
-        <div class="course-content">
-            <div class="course-title">Tuning Crash Tutorial</div>
-            <div class="cta-btn" onclick="loadCourse('https://dbvidya.talentlms.com/catalog/info/id:135')">View Course</div>
-        </div>
-    </div>
-
-    <div class="course-card">
-        <img src="course_erwin.png">
-        <div class="course-content">
-            <div class="course-title">Erwin Video Tutorial</div>
-            <div class="cta-btn" onclick="loadCourse('https://dbvidya.talentlms.com/catalog/info/id:130')">View Course</div>
-        </div>
-    </div>
-
-    <div class="course-card">
-        <img src="course_er_modeling.png">
-        <div class="course-content">
-            <div class="course-title">ER Modeling</div>
-            <div class="cta-btn" onclick="loadCourse('https://dbvidya.talentlms.com/catalog/info/id:133')">View Course</div>
-        </div>
-    </div>
-
-    <!-- ✅ Dimensional Modeling (Most Popular) -->
-    <div class="course-card">
-        <div class="badge">Most Popular</div>
-        <img src="course_dimensional.png">
-        <div class="course-content">
-            <div class="course-title">Dimensional Modeling</div>
-            <div class="cta-btn" onclick="loadCourse('https://dbvidya.talentlms.com/catalog/info/id:131')">View Course</div>
-        </div>
-    </div>
-
+  </div>
 </div>
 
-<!-- ✅ iframe where courses load -->
-<iframe id="courseFrame"></iframe>
-
-<!-- ✅ Footer -->
-<footer>
-    <p>© 2025 dbVidya Learning Portal</p>
-
-    <div class="social-icons">
-        <a href="https://www.youtube.com/@Dbvidya" target="_blank">
-            <img src="youtube_icon.png">
-        </a>
-
-        <a href="https://www.facebook.com/MyOnlineITCourses/" target="_blank">
-            <img src="facebook_icon.png">
-        </a>
+<section id="instructor" class="fade-section">
+  <h2>Instructor</h2>
+  <div class="instructor-card">
+    <div class="instructor-flex">
+      <img src="madhavi.jpg" class="instructor-photo" alt="Instructor Madhavi Batchu">
+      <iframe width="320" height="180"
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              style="border-radius:12px;"></iframe>
     </div>
+    <h3>Madhavi Batchu</h3>
+    <p>Data Modeling & Performance Tuning Specialist</p>
+  </div>
+</section>
+
+<h2 id="courses" class="fade-section">Courses</h2>
+
+<div class="support-box fade-section">
+  <h3>Need help choosing a course?</h3>
+  <p>Message me on WhatsApp for guidance on which course fits your background.</p>
+</div>
+
+<div class="course-container fade-section">
+  <div class="course-card" onclick="loadCourse('https://dbvidya.talentlms.com/catalog/info/id:128', this)">
+    <img src="course_oracle.png" alt="Oracle Performance Tuning course thumbnail">
+    <h3>Oracle Performance Tuning</h3>
+    <div class="cta-btn">View Course</div>
+  </div>
+
+  <div class="course-card" onclick="loadCourse('https://dbvidya.talentlms.com/catalog/info/id:135', this)">
+    <img src="course_tuning.png" alt="Tuning Crash Tutorial course thumbnail">
+    <h3>Tuning Crash Tutorial</h3>
+    <div class="cta-btn">View Course</div>
+  </div>
+
+  <div class="course-card" onclick="loadCourse('https://dbvidya.talentlms.com/catalog/info/id:130', this)">
+    <img src="course_erwin.png" alt="Erwin Data Modeling course thumbnail">
+    <h3>Erwin Video Tutorial</h3>
+    <div class="cta-btn">View Course</div>
+  </div>
+
+  <div class="course-card" onclick="loadCourse('https://dbvidya.talentlms.com/catalog/info/id:133', this)">
+    <img src="course_er_modeling.png" alt="Entity Relationship Modeling course thumbnail">
+    <h3>ER Modeling</h3>
+    <div class="cta-btn">View Course</div>
+  </div>
+
+  <div class="course-card" onclick="loadCourse('https://dbvidya.talentlms.com/catalog/info/id:131', this)">
+    <img src="course_dimensional.png" alt="Dimensional Modeling course thumbnail">
+    <h3>Dimensional Modeling</h3>
+    <div class="cta-btn">View Course</div>
+  </div>
+</div>
+
+<iframe id="courseFrame" class="fade-section"></iframe>
+
+<section class="testimonials fade-section">
+  <h2>What learners say</h2>
+  <div class="testimonial-strip">
+    <div class="testimonial">
+      <div class="testimonial-quote">
+        “The Oracle tuning examples are practical and easy to apply in real projects.”
+      </div>
+      <div class="testimonial-name">Srini</div>
+      <div class="testimonial-role">Oracle Developer</div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-quote">
+        “Dimensional modeling finally ‘clicked’ for me after this course. The explanations are very clear.”
+      </div>
+      <div class="testimonial-name">Priya</div>
+      <div class="testimonial-role">Data Engineer</div>
+    </div>
+  </div>
+</section>
+
+<section class="fade-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-section">
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>How do I access the courses after enrolling?</span><span>+</span>
+      </div>
+      <div class="faq-answer">
+        After enrolling, you’ll receive login details to the dbVidya learning portal by email.
+        You can access the videos anytime, from anywhere, at your own pace.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Are these courses suitable for beginners?</span><span>+</span>
+      </div>
+      <div class="faq-answer">
+        Yes. If you know basic SQL or databases, you can start with these courses.
+        Concepts are explained step by step with real examples.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Will I get recordings and lifetime access?</span><span>+</span>
+      </div>
+      <div class="faq-answer">
+        Once you enroll, you can watch the course videos as many times as you like,
+        subject to the platform’s access policy.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Can I get help choosing the right course?</span><span>+</span>
+      </div>
+      <div class="faq-answer">
+        Yes. You can message me on WhatsApp, share your background and goals,
+        and I’ll suggest the best starting point for you.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 dbVidya Learning Portal</p>
 </footer>
 
-<!-- ✅ Scroll to Top -->
 <div id="scrollTopBtn" onclick="scrollToTop()">⬆ Top</div>
 
-<!-- ✅ WhatsApp Button -->
-<a href="https://wa.me/919912323000?text=Hi%20I%20want%20course%20details" class="whatsapp-float">
-   💬 Chat on WhatsApp
+<a href="https://wa.me/919912323000" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <div class="whatsapp-button">💬 Chat on WhatsApp</div>
 </a>
 
 </body>
