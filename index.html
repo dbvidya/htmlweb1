@@ -7,86 +7,461 @@
 <link rel="icon" type="image/png" href="dbvidya_fevicon.png">
 
 <style>
-body { font-family: Arial, sans-serif; margin: 0; padding: 0; text-align: center; overflow-x: hidden; background: #fafafa; }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  overflow-x: hidden;
+  background: #fafafa;
+}
 
 /* HEADER */
-header { background-color: #064d2e; color: white; padding: 8px 10px; position: sticky; top: 0; z-index: 1000; }
-.header-flex { display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; }
-.header-logo { height: 40px; }
+header {
+  background-color: #064d2e;
+  color: white;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 90px; /* Premium height */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-logo {
+  height: 46px;
+}
+
+.header-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-aligned block */
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.header-contact-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 2px 0;
+}
+
+.header-contact svg {
+  width: 18px;
+  height: 18px;
+}
 
 /* HERO */
-.hero { position: relative; background: url('website_banner_dbvidya.png') center/cover no-repeat; padding: 110px 20px; color: white; }
-.hero::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.55); z-index: 1; }
-.hero-content { position: relative; z-index: 2; }
-.hero h1 { font-size: 32px; margin-bottom: 10px; }
-.hero p { font-size: 18px; margin-bottom: 25px; }
-.hero-buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-.hero-btn { padding: 14px 24px; background-color: #B86314; color: white; border-radius: 6px; font-size: 18px; font-weight: bold; text-decoration: none; transition: 0.3s; }
-.hero-btn:hover { background-color: #8F4E10; transform: scale(1.05); }
-.hero-btn.secondary { background-color: #0a66c2; }
+.hero {
+  position: relative;
+  background: url('website_banner_dbvidya.png') center/cover no-repeat;
+  padding: 140px 20px 80px 20px;
+  color: white;
+  min-height: 260px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.55);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* HERO BUTTONS */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  padding: 14px 24px;
+  background-color: #B86314;
+  color: white;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.hero-btn:hover {
+  background-color: #8F4E10;
+  transform: scale(1.05);
+}
+
+.hero-btn.secondary {
+  background-color: #0a66c2;
+}
 
 /* ANIMATIONS */
-.fade-section { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
-.fade-section.visible { opacity: 1; transform: translateY(0); }
+.fade-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.fade-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* GRADIENT SECTIONS */
+section.fade-section {
+  background: linear-gradient(135deg, #e9f7f1 0%, #d4f1e7 100%);
+  border-radius: 0 0 40px 40px;
+  padding: 60px 20px;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Testimonials specific gradient */
+section.testimonials.fade-section {
+  background: linear-gradient(135deg, #fff3e6 0%, #ffe7d1 100%);
+  border-radius: 40px 40px 0 0;
+  padding: 60px 20px;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* WAVES */
+.wave-top, .wave-bottom {
+  width: 100%;
+  height: 80px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.wave-top {
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="%23e9f7f1" d="M0,224L48,197.3C96,171,192,117,288,122.7C384,128,480,192,576,186.7C672,181,768,107,864,112C960,117,1056,203,1152,224C1248,245,1344,203,1392,181.3L1440,160L1440,0L0,0Z"/></svg>');
+}
+
+.wave-bottom {
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="%23ffe7d1" d="M0,64L48,69.3C96,75,192,85,288,122.7C384,160,480,224,576,224C672,224,768,160,864,160C960,160,1056,224,1152,229.3C1248,235,1344,181,1392,154.7L1440,128L1440,320L0,320Z"/></svg>');
+}
+
+/* SECTION DIVIDER */
+.section-divider {
+  width: 80%;
+  height: 4px;
+  margin: 40px auto;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #ff8c42, #ffb36b, #ff8c42);
+  background-size: 200% 200%;
+  animation: glowMove 4s ease infinite;
+}
+
+@keyframes glowMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
 /* INSTRUCTOR */
-section { padding: 30px 20px 10px 20px; }
-.instructor-card { max-width: 900px; margin: 0 auto; padding: 25px; border-radius: 12px; background: #e6f4ec; box-shadow: 0 0 18px rgba(10,111,60,0.35); }
-.instructor-flex { display: flex; justify-content: center; align-items: center; gap: 25px; flex-wrap: wrap; }
-.instructor-photo { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid #0a6f3c; }
+.instructor-card {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 25px;
+  border-radius: 12px;
+  background: #e6f4ec;
+  box-shadow: 0 0 18px rgba(10,111,60,0.35);
+}
 
-/* COURSES */
-.course-container { max-width: 1200px; margin: 20px auto 40px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 0 20px; }
-.course-card { background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); overflow: hidden; border: 2px solid #B86314; transition: 0.3s ease; cursor: pointer; }
-.course-card:hover { transform: scale(1.05); box-shadow: 0 12px 28px rgba(184,99,20,0.45); }
-.active-course { border: 4px solid #ff8c42 !important; box-shadow: 0 0 20px rgba(255,140,66,0.8) !important; transform: scale(1.03); }
-.course-card img { width: 100%; height: 160px; object-fit: cover; }
-.course-card h3 { margin: 10px 0 5px 0; }
-.cta-btn { padding: 12px 20px; background-color: #B86314; color: white; border-radius: 6px; text-decoration: none; font-weight: bold; cursor: pointer; display: inline-block; margin-bottom: 15px; }
+.instructor-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.instructor-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #0a6f3c;
+}
+
+/* COURSE-CARD VIDEO */
+.course-video {
+  width: 280px;
+  height: 160px;
+  border-radius: 10px;
+  border: none;
+}
+
+/* COURSE CARDS */
+.course-container {
+  max-width: 1200px;
+  margin: 20px auto 40px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 0 20px;
+}
+
+.course-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  overflow: hidden;
+  border: 2px solid #B86314;
+  transition: 0.3s ease;
+  cursor: pointer;
+  padding-bottom: 15px;
+}
+
+.course-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(184,99,20,0.45);
+}
+
+/* ZOOM-IN IMAGE HOVER */
+.course-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-bottom: 2px solid #B86314;
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+}
+
+.course-card:hover img {
+  transform: scale(1.08);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+.active-course {
+  border: 4px solid #ff8c42 !important;
+  background: #fff4e8 !important; /* soft orange tint */
+  box-shadow: 0 0 20px rgba(255,140,66,0.5) !important;
+  transform: scale(1.03);
+}
+
+.course-card h3 {
+  margin: 10px 0 5px 0;
+}
+
+.cta-btn {
+  padding: 12px 20px;
+  background-color: #B86314;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 10px;
+}
 
 /* SUPPORT BOX */
-.support-box { background: #fff7e6; border-left: 5px solid #B86314; padding: 15px 20px; margin: 0 auto 20px auto; max-width: 900px; border-radius: 8px; text-align: left; }
-.support-box h3 { margin: 0 0 5px 0; color: #B86314; }
-.support-box p { margin: 0; font-size: 15px; }
+.support-box {
+  background: #fff7e6;
+  border-left: 5px solid #B86314;
+  padding: 15px 20px;
+  margin: 0 auto 20px auto;
+  max-width: 900px;
+  border-radius: 8px;
+  text-align: left;
+}
 
-/* IFRAME (30% REDUCED HEIGHT) */
-#courseFrame { width: 100%; height: 455px; border: none; margin-top: 10px; }
+.support-box h3 {
+  margin: 0 0 5px 0;
+  color: #B86314;
+}
+
+.support-box p {
+  margin: 0;
+  font-size: 15px;
+}
+
+/* MAIN COURSE VIEWER */
+#courseFrame {
+  width: 100%;
+  height: 455px;
+  border: none;
+  margin-top: 10px;
+}
 
 /* TESTIMONIALS */
-.testimonials { background: #fff; padding: 30px 20px; }
-.testimonial-strip { max-width: 900px; margin: 0 auto; background: #f5f5f5; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-.testimonial { text-align: left; font-size: 15px; line-height: 1.5; }
-.testimonial-quote { font-style: italic; margin-bottom: 8px; }
-.testimonial-name { font-weight: bold; color: #064d2e; }
-.testimonial-role { font-size: 13px; color: #555; }
+.testimonials {
+  padding: 30px 20px;
+}
+
+.testimonial-strip {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.testimonial {
+  text-align: left;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.testimonial-quote {
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.testimonial-name {
+  font-weight: bold;
+  color: #064d2e;
+}
+
+.testimonial-role {
+  font-size: 13px;
+  color: #555;
+}
 
 /* FAQ */
-.faq-section { max-width: 900px; margin: 0 auto 10px auto; text-align: left; }
-.faq-item { background: #ffffff; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); overflow: hidden; }
-.faq-question { padding: 12px 16px; cursor: pointer; font-weight: bold; background: #f4f4f4; display: flex; justify-content: space-between; align-items: center; }
-.faq-answer { padding: 0 16px 12px 16px; display: none; font-size: 14px; line-height: 1.5; }
-.faq-item.open .faq-answer { display: block; }
+.faq-section {
+  max-width: 900px;
+  margin: 0 auto 10px auto;
+  text-align: left;
+}
+
+.faq-item {
+  background: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.faq-question {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: bold;
+  background: #f4f4f4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-answer {
+  padding: 0 16px 12px 16px;
+  display: none;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.faq-item.open .faq-answer {
+  display: block;
+}
 
 /* FOOTER */
-footer { background: #333; color: white; padding: 20px; margin-top: 40px; }
+footer {
+  background: #333;
+  color: white;
+  padding: 20px;
+  margin-top: 40px;
+}
 
 /* SCROLL TO TOP */
-#scrollTopBtn { position: fixed; bottom: 25px; left: 25px; background-color: #064d2e; color: white; padding: 12px 18px; border-radius: 50px; cursor: pointer; display: none; z-index: 9999; }
+#scrollTopBtn {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  background-color: #064d2e;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  display: none;
+  z-index: 9999;
+}
 
 /* WHATSAPP BUTTON */
-.whatsapp-float { position: fixed; bottom: 25px; right: 25px; z-index: 9999; text-decoration: none; }
-.whatsapp-button { background-color: #25D366; color: white; font-weight: bold; padding: 12px 20px; border-radius: 50px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); font-size: 16px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
-.whatsapp-button:hover { transform: scale(1.05); }
+.whatsapp-float {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 9999;
+  text-decoration: none;
+}
+
+.whatsapp-button {
+  background-color: #25D366;
+  color: white;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.05);
+}
 
 /* MOBILE */
+@media (max-width: 768px) {
+  .header-flex {
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .header-contact {
+    align-items: center;
+  }
+}
+
 @media (max-width: 600px) {
-.course-container { grid-template-columns: 1fr; }
-.cta-btn { width: 100%; padding: 16px; font-size: 18px; }
-.course-card img { height: 200px; }
-.hero h1 { font-size: 26px; }
-.hero p { font-size: 16px; }
-.hero-buttons { flex-direction: column; }
-.hero-btn { width: 100%; text-align: center; }
+  .course-card img {
+    height: 200px;
+  }
+
+  .course-container {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 18px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .hero-btn {
+    width: 100%;
+    text-align: center;
+  }
 }
 </style>
 
@@ -99,25 +474,40 @@ function scrollToSection(id) {
 function loadCourse(url, card) {
   const frame = document.getElementById("courseFrame");
   if (frame) frame.src = url;
-  document.querySelectorAll(".course-card").forEach(c => c.classList.remove("active-course"));
-  if (card) card.classList.add("active-course");
+
+  // Remove highlight from all cards
+  document.querySelectorAll(".course-card").forEach(c => {
+    c.classList.remove("active-course");
+  });
+
+  // Add highlight to selected card
+  if (card) {
+    card.classList.add("active-course");
+    card.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  // Smooth scroll to course viewer
+  setTimeout(() => {
+    if (frame) {
+      frame.scrollIntoView({ behavior: "smooth" });
+    }
+  }, 300);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Scroll-in animation
   document.querySelectorAll(".fade-section").forEach(sec => {
     const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("visible");
+      });
     }, { threshold: 0.2 });
     obs.observe(sec);
   });
 
-  // FAQ accordion
   document.querySelectorAll(".faq-question").forEach(q => {
     q.addEventListener("click", () => q.parentElement.classList.toggle("open"));
   });
 
-  // Auto-load first course
   const firstCard = document.querySelector(".course-card");
   if (firstCard) {
     loadCourse("https://dbvidya.talentlms.com/catalog/info/id:128", firstCard);
@@ -129,7 +519,9 @@ window.onscroll = function() {
   btn.style.display = document.documentElement.scrollTop > 200 ? "block" : "none";
 };
 
-function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 </script>
 </head>
 
@@ -138,14 +530,46 @@ function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
 <header>
   <div class="header-flex">
     <img src="logo.png" class="header-logo" alt="dbVidya logo">
-    <h2>dbVidya Video Tutorials | +91 9912323000 | info@dbvidya.com</h2>
+
+    <div class="header-contact">
+      <div class="header-contact-line">
+        <!-- Email SVG with deep blue gradient -->
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <defs>
+            <linearGradient id="emailGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1e3c72" />
+              <stop offset="100%" stop-color="#2a5298" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#emailGradient)" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 
+          2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v.01L12 13l8-6.99V6H4zm0 12h16V9l-8 
+          7-8-7v9z"/>
+        </svg>
+        <span>info@dbvidya.com</span>
+      </div>
+
+      <div class="header-contact-line">
+        <!-- Phone SVG with deep green gradient -->
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <defs>
+            <linearGradient id="phoneGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0bab64" />
+              <stop offset="100%" stop-color="#3bb78f" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#phoneGradient)" d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 
+          1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C11.85 
+          21 3 12.15 3 1a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.59a1 1 0 0 1-.25 
+          1.01l-2.2 2.19z"/>
+        </svg>
+        <span>+91 9912323000</span>
+      </div>
+    </div>
   </div>
 </header>
 
 <div class="hero fade-section">
   <div class="hero-content">
-    <h1>Learn Database Performance & Data Modeling With Confidence</h1>
-    <p>Clear, practical courses designed for real-world success.</p>
     <div class="hero-buttons">
       <a class="hero-btn" onclick="scrollToSection('courses')">Browse All Courses</a>
       <a class="hero-btn secondary" onclick="scrollToSection('instructor')">Watch Intro Video</a>
@@ -153,23 +577,30 @@ function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
   </div>
 </div>
 
+<div class="wave-top"></div>
+
 <section id="instructor" class="fade-section">
   <h2>Instructor</h2>
+  <div class="section-divider"></div>
+
   <div class="instructor-card">
     <div class="instructor-flex">
       <img src="madhavi.jpg" class="instructor-photo" alt="Instructor Madhavi Batchu">
-      <iframe width="320" height="180"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-              style="border-radius:12px;"></iframe>
+
+      <!-- COURSE-CARD SIZED VIDEO -->
+      <iframe
+          class="course-video"
+          src="https://www.youtube.com/embed/TXWPuCoYppk"
+          frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope">
+      </iframe>
     </div>
     <h3>Madhavi Batchu</h3>
     <p>Data Modeling & Performance Tuning Specialist</p>
   </div>
 </section>
+
+<div class="wave-bottom"></div>
 
 <h2 id="courses" class="fade-section">Courses</h2>
 
@@ -179,6 +610,7 @@ function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
 </div>
 
 <div class="course-container fade-section">
+
   <div class="course-card" onclick="loadCourse('https://dbvidya.talentlms.com/catalog/info/id:128', this)">
     <img src="course_oracle.png" alt="Oracle Performance Tuning course thumbnail">
     <h3>Oracle Performance Tuning</h3>
@@ -208,18 +640,23 @@ function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
     <h3>Dimensional Modeling</h3>
     <div class="cta-btn">View Course</div>
   </div>
+
 </div>
 
 <iframe id="courseFrame" class="fade-section"></iframe>
 
+<div class="wave-top"></div>
+
 <section class="testimonials fade-section">
   <h2>What learners say</h2>
+  <div class="section-divider"></div>
+
   <div class="testimonial-strip">
     <div class="testimonial">
       <div class="testimonial-quote">
-        “The Oracle tuning examples are practical and easy to apply in real projects.”
+        “The Oracle tuning examples are practical and easy to apply in real time projects.”
       </div>
-      <div class="testimonial-name">Srini</div>
+      <div class="testimonial-name">Raj</div>
       <div class="testimonial-role">Oracle Developer</div>
     </div>
     <div class="testimonial">
@@ -227,20 +664,25 @@ function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
         “Dimensional modeling finally ‘clicked’ for me after this course. The explanations are very clear.”
       </div>
       <div class="testimonial-name">Priya</div>
-      <div class="testimonial-role">Data Engineer</div>
+      <div class="testimonial-role">Data Architect</div>
     </div>
   </div>
 </section>
 
+<div class="wave-bottom"></div>
+<div class="wave-top"></div>
+
 <section class="fade-section">
   <h2>Frequently Asked Questions</h2>
+  <div class="section-divider"></div>
+
   <div class="faq-section">
     <div class="faq-item">
       <div class="faq-question">
         <span>How do I access the courses after enrolling?</span><span>+</span>
       </div>
       <div class="faq-answer">
-        After enrolling, you’ll receive login details to the dbVidya learning portal by email.
+        After paying the fee amount, login details will be sent in WhatsApp.
         You can access the videos anytime, from anywhere, at your own pace.
       </div>
     </div>
@@ -261,7 +703,7 @@ function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
       </div>
       <div class="faq-answer">
         Once you enroll, you can watch the course videos as many times as you like,
-        subject to the platform’s access policy.
+        for ONE MONTH duration.
       </div>
     </div>
 
@@ -276,6 +718,8 @@ function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
     </div>
   </div>
 </section>
+
+<div class="wave-bottom"></div>
 
 <footer>
   <p>© 2025 dbVidya Learning Portal</p>
