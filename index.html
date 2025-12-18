@@ -568,11 +568,13 @@ function scrollToTop() {
   </div>
 </header>
 
-<div class="hero fade-section">
+
+<div class="hero fade-section" tabindex="-1">
+
   <div class="hero-content">
     <div class="hero-buttons">
       <a class="hero-btn" onclick="scrollToSection('courses')">Browse All Courses</a>
-      <a class="hero-btn secondary" onclick="scrollToSection('instructor')">Watch Intro Video</a>
+      <a class="hero-btn secondary" onclick="scrollToSection('instructor')">Watch Sample Video</a>
     </div>
   </div>
 </div>
@@ -643,7 +645,7 @@ function scrollToTop() {
 
 </div>
 
-<iframe id="courseFrame" class="fade-section"></iframe>
+<iframe id="courseFrame" class="fade-section" tabindex="-1"></iframe>
 
 <div class="wave-top"></div>
 
@@ -731,5 +733,15 @@ function scrollToTop() {
   <div class="whatsapp-button">💬 Chat on WhatsApp</div>
 </a>
 
+<script>
+window.addEventListener("load", function () {
+    window.scrollTo(0, 0);  // Instantly start at top
+    const hero = document.querySelector(".hero");
+    if (hero) hero.focus(); // Focus without scrolling again
+});
+</script>
+
+
 </body>
 </html>
+
