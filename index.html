@@ -44,9 +44,16 @@ header:hover {
 }
 
 /* LOGO */
+
+
 .header-logo {
-  height: 28px;
+  width: 150px;              /* adjust size */
+  height: 150px;             /* make it square */
+  border-radius: 50%;        /* turns square into circle */
+  overflow: hidden;          /* hides corners */
+  object-fit: cover;         /* ensures image fills circle */
 }
+
 
 /* CONTACT BLOCK */
 .header-contact {
@@ -54,7 +61,7 @@ header:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 20px;
   line-height: 1.4;
   flex: 1;
 }
@@ -144,19 +151,18 @@ header:hover {
     height: 12px;
   }
 }
-
-
 /* HERO */
 .hero {
   position: relative;
   background: url('website_banner_dbvidya.png') center/cover no-repeat;
   color: white;
-  min-height: 100vh;              /* fill full viewport height */
-  display: flex;                  /* enable flexbox */
-  flex-direction: column;         /* stack content vertically */
-  justify-content: flex-end;      /* push content to bottom */
-  align-items: center;            /* center horizontally */
-  padding: 20px;                  /* keep some padding */
+  min-height: 100vh;              /* full viewport height on desktop */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px;
+  text-align: center;             /* center text for smaller screens */
 }
 
 .hero::before {
@@ -181,7 +187,7 @@ header:hover {
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
-  margin-bottom: 40px; /* spacing from bottom edge */
+  margin-bottom: 40px;
 }
 
 .hero-btn {
@@ -202,6 +208,53 @@ header:hover {
 
 .hero-btn.secondary {
   background-color: #0a66c2;
+}
+
+/* -------------------- RESPONSIVE -------------------- */
+@media (max-width: 1024px) {
+  .hero {
+    min-height: 70vh;             /* reduce height for tablets */
+    padding: 15px;
+  }
+  .hero-btn {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 60vh;             /* smaller height for mobile */
+    padding: 10px;
+    background-position: top;     /* shift focus for narrow screens */
+  }
+  .hero-content h1, .hero-content h2 {
+    font-size: 1.5rem;            /* scale down headings */
+  }
+  .hero-btn {
+    font-size: 15px;
+    padding: 10px 18px;
+    width: 100%;                  /* buttons stack full-width */
+    max-width: 280px;
+  }
+  .hero-buttons {
+    flex-direction: column;       /* stack buttons vertically */
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 50vh;             /* very small devices */
+  }
+  .hero-content h1, .hero-content h2 {
+    font-size: 1.2rem;
+  }
+  .hero-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 }
 
 
