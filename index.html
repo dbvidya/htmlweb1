@@ -17,56 +17,146 @@ body {
 }
 
 /* HEADER */
+/* HEADER BASE */
 header {
-  background-color: #064d2e;
+  background: linear-gradient(to right, #0a66c2, #004080);
   color: white;
-  padding: 10px 20px;
+  padding: 6px 12px;
   position: sticky;
   top: 0;
   z-index: 1000;
   box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  transition: background 0.4s ease;
 }
 
+header:hover {
+  background: linear-gradient(to right, #0a66c2, #0073e6);
+}
+
+/* FLEX CONTAINER */
 .header-flex {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 90px; /* Premium height */
+  min-height: 54px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+/* LOGO */
 .header-logo {
-  height: 46px;
+  height: 28px;
 }
 
+/* CONTACT BLOCK */
 .header-contact {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center-aligned block */
-  font-size: 14px;
-  line-height: 1.5;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 1.4;
+  flex: 1;
 }
 
+/* CONTACT LINES */
 .header-contact-line {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   margin: 2px 0;
+  padding: 3px 6px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
 }
 
-.header-contact svg {
-  width: 18px;
-  height: 18px;
+.header-contact-line svg {
+  width: 14px;
+  height: 14px;
+  transition: filter 0.3s ease, transform 0.3s ease, fill 0.3s ease;
 }
+
+/* EMAIL LINE HOVER */
+.header-contact-line.email:hover {
+  background-color: rgba(10, 102, 194, 0.15);
+  color: #0a66c2;
+}
+
+.header-contact-line.email:hover svg {
+  filter: drop-shadow(0 0 6px #0a66c2);
+  transform: scale(1.1);
+  fill: #0a66c2;
+}
+
+/* PHONE LINE HOVER */
+.header-contact-line.phone:hover {
+  background-color: rgba(11, 171, 100, 0.15);
+  color: #0bab64;
+}
+
+.header-contact-line.phone:hover svg {
+  filter: drop-shadow(0 0 6px #0bab64);
+  transform: scale(1.1);
+  fill: #0bab64;
+}
+
+/* ------------------- */
+/* RESPONSIVE QUERIES  */
+/* ------------------- */
+
+/* Tablet screens */
+@media (max-width: 768px) {
+  .header-flex {
+    flex-direction: column;       /* stack logo + contact vertically */
+    justify-content: center;
+    min-height: auto;
+    padding: 8px 0;
+  }
+
+  .header-logo {
+    margin-bottom: 8px;           /* space between logo and contact */
+  }
+
+  .header-contact {
+    flex-direction: row;          /* email + phone side by side */
+    gap: 12px;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 480px) {
+  .header-contact {
+    flex-direction: column;       /* stack email + phone vertically */
+    gap: 6px;
+  }
+
+  .header-logo {
+    height: 24px;                 /* smaller logo on mobile */
+  }
+
+  .header-contact-line {
+    font-size: 11px;
+    padding: 2px 5px;
+  }
+
+  .header-contact-line svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
 
 /* HERO */
 .hero {
   position: relative;
   background: url('website_banner_dbvidya.png') center/cover no-repeat;
-  padding: 140px 20px 80px 20px;
   color: white;
-  min-height: 260px;
+  min-height: 100vh;              /* fill full viewport height */
+  display: flex;                  /* enable flexbox */
+  flex-direction: column;         /* stack content vertically */
+  justify-content: flex-end;      /* push content to bottom */
+  align-items: center;            /* center horizontally */
+  padding: 20px;                  /* keep some padding */
 }
 
 .hero::before {
@@ -81,6 +171,8 @@ header {
 .hero-content {
   position: relative;
   z-index: 2;
+  width: 100%;
+  text-align: center;
 }
 
 /* HERO BUTTONS */
@@ -89,6 +181,7 @@ header {
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
+  margin-bottom: 40px; /* spacing from bottom edge */
 }
 
 .hero-btn {
@@ -110,6 +203,7 @@ header {
 .hero-btn.secondary {
   background-color: #0a66c2;
 }
+
 
 /* ANIMATIONS */
 .fade-section {
@@ -215,92 +309,150 @@ section.testimonials.fade-section {
   max-width: 1200px;
   margin: 20px auto 40px auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
-  padding: 0 20px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  padding: 0 10px;
 }
 
 .course-card {
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   overflow: hidden;
   border: 2px solid #B86314;
   transition: 0.3s ease;
   cursor: pointer;
-  padding-bottom: 15px;
+  padding-bottom: 8px;
 }
 
 .course-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 28px rgba(184,99,20,0.45);
+  box-shadow: 0 8px 18px rgba(184,99,20,0.35);
 }
 
-/* ZOOM-IN IMAGE HOVER */
+/* COMPRESSED IMAGE WITH FULL CONTENT */
 .course-card img {
   width: 100%;
-  height: 160px;
-  object-fit: cover;
+  height: 80px;
+  object-fit: contain;                  /* show full image without cropping */
+  background-color: #f9f9f9;            /* fill empty space if image is narrow */
   border-bottom: 2px solid #B86314;
   transition: transform 0.4s ease, box-shadow 0.3s ease;
 }
 
 .course-card:hover img {
   transform: scale(1.08);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
 }
 
 .active-course {
-  border: 4px solid #ff8c42 !important;
-  background: #fff4e8 !important; /* soft orange tint */
-  box-shadow: 0 0 20px rgba(255,140,66,0.5) !important;
-  transform: scale(1.03);
+  border: 3px solid #ff8c42 !important;
+  background: #fff4e8 !important;
+  box-shadow: 0 0 12px rgba(255,140,66,0.4) !important;
+  transform: scale(1.02);
 }
 
 .course-card h3 {
-  margin: 10px 0 5px 0;
+  margin: 6px 0 3px 0;
+  font-size: 0.85rem;
 }
 
 .cta-btn {
-  padding: 12px 20px;
+  padding: 6px 10px;
   background-color: #B86314;
   color: white;
-  border-radius: 6px;
+  border-radius: 4px;
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 6px;
+  font-size: 0.8rem;
 }
 
 /* SUPPORT BOX */
 .support-box {
   background: #fff7e6;
-  border-left: 5px solid #B86314;
-  padding: 15px 20px;
-  margin: 0 auto 20px auto;
-  max-width: 900px;
-  border-radius: 8px;
+  border-left: 4px solid #B86314;
+  padding: 10px 12px;
+  margin: 0 auto 15px auto;
+  max-width: 600px;
+  border-radius: 6px;
   text-align: left;
 }
 
 .support-box h3 {
-  margin: 0 0 5px 0;
+  margin: 0 0 4px 0;
   color: #B86314;
+  font-size: 0.9rem;
 }
 
 .support-box p {
   margin: 0;
-  font-size: 15px;
+  font-size: 13px;
 }
 
+/* ------------------- */
+/* RESPONSIVE QUERIES  */
+/* ------------------- */
+
+/* Tablet screens */
+@media (max-width: 768px) {
+  .course-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .course-card img {
+    height: 100px;
+  }
+
+  .course-card h3 {
+    font-size: 0.9rem;
+  }
+
+  .cta-btn {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 480px) {
+  .course-container {
+    grid-template-columns: 1fr;
+  }
+
+  .course-card img {
+    height: 120px;
+  }
+
+  .course-card h3 {
+    font-size: 1rem;
+  }
+
+  .cta-btn {
+    font-size: 0.9rem;
+    padding: 10px 14px;
+  }
+
+  .support-box {
+    max-width: 100%;
+    font-size: 14px;
+  }
+}
+
+
 /* MAIN COURSE VIEWER */
+
 #courseFrame {
-  width: 100%;
+  width: 80%;
   height: 455px;
-  border: none;
+  border: 5px solid #006400;   /* dark green border */
+  border-radius: 6px;          /* optional: rounded corners */
   margin-top: 10px;
 }
+
 
 /* TESTIMONIALS */
 .testimonials {
@@ -399,6 +551,7 @@ footer {
 }
 
 /* WHATSAPP BUTTON */
+/* WHATSAPP FLOATING ICON */
 .whatsapp-float {
   position: fixed;
   bottom: 25px;
@@ -407,22 +560,25 @@ footer {
   text-decoration: none;
 }
 
-.whatsapp-button {
+.whatsapp-icon {
+  width: 50px;              /* size of the icon */
+  height: 50px;
   background-color: #25D366;
-  color: white;
-  font-weight: bold;
-  padding: 12px 20px;
-  border-radius: 50px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  font-size: 16px;
+  border-radius: 50%;       /* makes it circular */
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   transition: transform 0.3s ease;
 }
 
-.whatsapp-button:hover {
-  transform: scale(1.05);
+.whatsapp-icon img {
+  width: 28px;              /* size of the logo inside */
+  height: 28px;
+}
+
+.whatsapp-icon:hover {
+  transform: scale(1.1);    /* subtle hover effect */
 }
 
 /* MOBILE */
@@ -645,7 +801,9 @@ function scrollToTop() {
 
 </div>
 
-<iframe id="courseFrame" class="fade-section" tabindex="-1"></iframe>
+
+<iframe id="courseFrame" class="fade-section" tabindex="-1" aria-hidden="true"></iframe>
+
 
 <div class="wave-top"></div>
 
@@ -724,14 +882,20 @@ function scrollToTop() {
 <div class="wave-bottom"></div>
 
 <footer>
-  <p>© 2025 dbVidya Learning Portal</p>
+  <p>© 2026 dbVidya Learning Portal</p>
 </footer>
 
 <div id="scrollTopBtn" onclick="scrollToTop()">⬆ Top</div>
 
 <a href="https://wa.me/919912323000" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
-  <div class="whatsapp-button">💬 Chat on WhatsApp</div>
+  <div class="whatsapp-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28" fill="white">
+      <path d="M16 0C7.163 0 0 7.163 0 16c0 2.828.735 5.49 2.126 7.857L0 32l8.39-2.19A15.91 15.91 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333c-2.61 0-5.167-.68-7.407-1.967l-.53-.31-4.973 1.297 1.327-4.86-.345-.56A13.333 13.333 0 1 1 16 29.333zm7.373-9.6c-.403-.2-2.38-1.173-2.747-1.307-.367-.133-.635-.2-.903.2-.268.4-1.04 1.307-1.28 1.573-.24.267-.47.3-.873.1-.403-.2-1.7-.627-3.24-2-1.197-1.067-2.007-2.387-2.24-2.787-.233-.4-.025-.613.175-.813.18-.18.403-.467.605-.7.2-.233.268-.4.403-.667.134-.267.067-.5-.033-.7-.1-.2-.903-2.173-1.237-2.973-.325-.78-.657-.673-.903-.686-.233-.013-.5-.013-.768-.013-.268 0-.7.1-1.067.5-.367.4-1.4 1.373-1.4 3.347s1.433 3.88 1.633 4.147c.2.267 2.82 4.307 6.833 6.027.957.413 1.7.66 2.28.847.957.305 1.827.267 2.513.16.767-.113 2.38-.973 2.713-1.913.333-.94.333-1.747.233-1.913-.1-.167-.367-.267-.77-.467z"/>
+    </svg>
+  </div>
 </a>
+
+
 
 <script>
 window.addEventListener("load", function () {
